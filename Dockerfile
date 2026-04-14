@@ -7,11 +7,11 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish
 
 # Stage 2: Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
-
-ENV ASPNETCORE_URLS=http://+:80
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 WORKDIR /app
 COPY --from=build /app/publish .
+
+ENV ASPNETCORE_URLS=http://+:80
 
 ENTRYPOINT ["dotnet", "webapp.dll"]
